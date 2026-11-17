@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Claims | Admin{% endblock %}
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <h2 class="fw-bold mb-4">Claims Management</h2>
+    <div class="table-responsive">
+      <table class="table table-hover shadow-sm">
+        <thead class="table-light">
+          <tr>
+            <th>Customer</th>
+            <th>Policy</th>
+            <th>Reason</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in claims %}
+          <tr>
+            <td>{{ item.customer.user.full_name }}</td>
+            <td>{{ item.policy.policy_number }}</td>
+            <td>{{ item.claim_reason }}</td>
+            <td>₹{{ '%.2f' % item.claim_amount }}</td>
+            <td>{{ item.status }}</td>
+            <td>
+              {% if item.status.lower() == 'pending' %}
+              <form action="{{ url_for('admin.approve_claim', claim_id=item.id) }}" method="post" class="d-inline">
+                <button class="btn btn-success btn-sm" type="submit">Approve</button>
+              </form>
+              <form action="{{ url_for('admin.reject_claim', claim_id=item.id) }}" method="post" class="d-inline">
+                <button class="btn btn-danger btn-sm" type="submit">Reject</button>
+              </form>
+              {% endif %}
+            </td>
+          </tr>
+          {% else %}
+          <tr><td colspan="6" class="text-center text-secondary">No claims available.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}

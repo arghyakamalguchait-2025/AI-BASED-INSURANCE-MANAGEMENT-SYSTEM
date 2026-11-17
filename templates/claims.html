@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}My Claims | InsureWise AI{% endblock %}
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fw-bold mb-0">My Claims</h2>
+      <a href="{{ url_for('claims.submit_claim') }}" class="btn btn-primary">Submit Claim</a>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-hover shadow-sm">
+        <thead class="table-light">
+          <tr>
+            <th>Claim ID</th>
+            <th>Policy</th>
+            <th>Reason</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for claim in claims %}
+          <tr>
+            <td>{{ claim.id }}</td>
+            <td>{{ claim.policy.policy_number }}</td>
+            <td>{{ claim.claim_reason }}</td>
+            <td>₹{{ '%.2f' % claim.claim_amount }}</td>
+            <td><span class="badge bg-warning text-dark">{{ claim.status }}</span></td>
+            <td>{{ claim.submitted_at.date() }}</td>
+          </tr>
+          {% else %}
+          <tr><td colspan="6" class="text-center text-secondary">No claim history found.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}

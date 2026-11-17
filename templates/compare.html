@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Compare Plans | InsureWise AI{% endblock %}
+{% block content %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="fw-bold mb-4">Compare Insurance Plans</h2>
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-body">
+        <form method="get" class="row g-3">
+          <div class="col-md-10">
+            <select class="form-select" name="plan_id" multiple size="5">
+              {% for plan in plans %}
+                <option value="{{ plan.id }}">{{ plan.plan_name }} - {{ plan.category }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100">Compare</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    {% if selected %}
+    <div class="table-responsive">
+      <table class="table table-bordered bg-white shadow-sm">
+        <thead class="table-light">
+          <tr>
+            <th>Plan Name</th>
+            <th>Category</th>
+            <th>Monthly Premium</th>
+            <th>Coverage</th>
+            <th>Duration</th>
+            <th>Benefits</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for plan in selected %}
+          <tr>
+            <td>{{ plan.plan_name }}</td>
+            <td>{{ plan.category }}</td>
+            <td>₹{{ '%.2f' % plan.monthly_premium }}</td>
+            <td>₹{{ '{:,.0f}'.format(plan.coverage_amount) }}</td>
+            <td>{{ plan.duration_years }} years</td>
+            <td>{{ plan.benefits }}</td>
+            <td>{{ plan.description }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Submit Claim | InsureWise AI{% endblock %}
+{% block content %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card shadow-sm border-0">
+          <div class="card-body p-4">
+            <h2 class="fw-bold mb-4">Submit a Claim</h2>
+            <form method="post">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Owned Policy</label>
+                  <select class="form-select" name="policy_id" required>
+                    {% for policy in policies %}
+                    <option value="{{ policy.id }}">{{ policy.policy_number }} - {{ policy.plan.plan_name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Claim Amount</label>
+                  <input type="number" class="form-control" name="claim_amount" min="1" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Incident Date</label>
+                  <input type="date" class="form-control" name="incident_date" required>
+                </div>
+                <div class="col-md-12">
+                  <label class="form-label">Claim Reason</label>
+                  <textarea class="form-control" name="claim_reason" rows="4" required></textarea>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary mt-4">Submit Claim</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

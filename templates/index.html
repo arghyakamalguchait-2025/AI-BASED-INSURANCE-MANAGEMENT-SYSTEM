@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+
+{% block title %}InsureWise AI | Smart Insurance{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center gy-5">
+            <div class="col-lg-7">
+                <span class="badge text-bg-light text-primary mb-3 px-3 py-2 rounded-pill">AI-powered insurance platform</span>
+                <h1 class="display-4 fw-bold text-white">Smart Insurance for a Secure Tomorrow</h1>
+                <p class="lead text-white-50 mt-3">
+                    Protect your future with intelligent insurance solutions. Explore plans, estimate premiums,
+                    manage policies, and get personalized assistance through our AI-powered platform.
+                </p>
+                <div class="d-flex gap-3 flex-wrap mt-4">
+                    <a href="{{ url_for('insurance.plans') }}" class="btn btn-light btn-lg px-4">Explore Plans</a>
+                    <a href="{{ url_for('insurance.recommendations') }}" class="btn btn-outline-light btn-lg px-4">Get AI Recommendations</a>
+                </div>
+                <div class="mt-4 d-flex flex-wrap gap-4 small text-white-50">
+                    <span><i class="bi bi-check-circle-fill text-success me-2"></i>Personalized recommendations</span>
+                    <span><i class="bi bi-check-circle-fill text-success me-2"></i>Fast premium estimates</span>
+                    <span><i class="bi bi-check-circle-fill text-success me-2"></i>Secure policy support</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="hero-card p-4 rounded-4 shadow-lg">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="badge bg-primary-subtle text-primary">Live protection</span>
+                        <span class="text-success fw-semibold"><i class="bi bi-shield-check"></i> Secure</span>
+                    </div>
+                    <h3 class="fw-bold mb-3">Coverage Snapshot</h3>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="metric-box">
+                                <small>Avg. Policy</small>
+                                <h5>₹2.4L</h5>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="metric-box">
+                                <small>Monthly Premium</small>
+                                <h5>₹1,850</h5>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="metric-box">
+                                <small>Claims Approved</small>
+                                <h5>94%</h5>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="metric-box">
+                                <small>Support</small>
+                                <h5>AI</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Insurance Categories</h2>
+            <p class="text-secondary">Choose a policy that matches your needs and life stage.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm h-100 plan-card">
+                    <div class="card-body p-4">
+                        <div class="icon-wrap mb-3"><i class="bi bi-heart-pulse"></i></div>
+                        <h4>Life Insurance</h4>
+                        <p>Protect your family with dependable long-term financial security.</p>
+                        <ul class="list-unstyled small text-secondary">
+                            <li><i class="bi bi-check2 text-success me-2"></i>Family protection</li>
+                            <li><i class="bi bi-check2 text-success me-2"></i>Long-term support</li>
+                        </ul>
+                        <a href="{{ url_for('insurance.plans', category='Life Insurance') }}" class="btn btn-outline-primary">Explore</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm h-100 plan-card">
+                    <div class="card-body p-4">
+                        <div class="icon-wrap mb-3"><i class="bi bi-shield-plus"></i></div>
+                        <h4>Health Insurance</h4>
+                        <p>Access advanced healthcare support with comfortable medical coverage.</p>
+                        <ul class="list-unstyled small text-secondary">
+                            <li><i class="bi bi-check2 text-success me-2"></i>Hospital cover</li>
+                            <li><i class="bi bi-check2 text-success me-2"></i>Wellness benefits</li>
+                        </ul>
+                        <a href="{{ url_for('insurance.plans', category='Health Insurance') }}" class="btn btn-outline-primary">Explore</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm h-100 plan-card">
+                    <div class="card-body p-4">
+                        <div class="icon-wrap mb-3"><i class="bi bi-car-front"></i></div>
+                        <h4>Vehicle Insurance</h4>
+                        <p>Drive confidently with protection for accidents, damage, and emergencies.</p>
+                        <ul class="list-unstyled small text-secondary">
+                            <li><i class="bi bi-check2 text-success me-2"></i>Roadside support</li>
+                            <li><i class="bi bi-check2 text-success me-2"></i>Accident protection</li>
+                        </ul>
+                        <a href="{{ url_for('insurance.plans', category='Vehicle Insurance') }}" class="btn btn-outline-primary">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Why choose InsureWise AI?</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-3"><div class="feature-box"><i class="bi bi-lightning-charge"></i><h5>Fast Recommendations</h5></div></div>
+            <div class="col-md-3"><div class="feature-box"><i class="bi bi-graph-up-arrow"></i><h5>Smart Insights</h5></div></div>
+            <div class="col-md-3"><div class="feature-box"><i class="bi bi-shield-check"></i><h5>Secure Policies</h5></div></div>
+            <div class="col-md-3"><div class="feature-box"><i class="bi bi-chat-dots"></i><h5>AI Assistance</h5></div></div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-primary-subtle">
+    <div class="container">
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-6">
+                <h2 class="fw-bold">How it works</h2>
+                <div class="step-list">
+                    <div class="step-item"><span>01</span><div><h6>Explore plans</h6><p>Browse insurance categories and coverage details.</p></div></div>
+                    <div class="step-item"><span>02</span><div><h6>Estimate premiums</h6><p>Use the premium calculator for demonstration values.</p></div></div>
+                    <div class="step-item"><span>03</span><div><h6>Apply and track</h6><p>Securely manage policies and claims from your dashboard.</p></div></div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm p-4">
+                    <h4 class="fw-bold">AI-Powered Insurance Assistance</h4>
+                    <p class="text-secondary">InsureBot AI can explain plans, calculate fictional premiums, recommend products, and help you manage your account.</p>
+                    <a href="{{ url_for('chatbot.chatbot') }}" class="btn btn-primary">Talk to InsureBot AI</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Frequently Asked Questions</h2>
+        </div>
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#faq1">What is insurance?</button></h2>
+                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Insurance is a financial protection tool that helps cover future risks and unexpected events.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq2">Can I compare plans?</button></h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Yes. You can compare multiple insurance plans by premium, coverage, duration, and benefits.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq3">How does the chatbot help?</button></h2>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">The chatbot explains policies, recommends plans, calculates estimates, and helps track claims.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard | InsureWise AI{% endblock %}
+{% block content %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="fw-bold mb-4">Administrator Dashboard</h2>
+    <div class="row g-4 mb-4">
+      <div class="col-md-3"><div class="card stat-card"><div class="card-body"><h6>Total Customers</h6><h3>{{ total_customers }}</h3></div></div></div>
+      <div class="col-md-3"><div class="card stat-card"><div class="card-body"><h6>Total Plans</h6><h3>{{ total_plans }}</h3></div></div></div>
+      <div class="col-md-3"><div class="card stat-card"><div class="card-body"><h6>Policies</h6><h3>{{ total_policies }}</h3></div></div></div>
+      <div class="col-md-3"><div class="card stat-card"><div class="card-body"><h6>Pending Claims</h6><h3>{{ pending_claims }}</h3></div></div></div>
+    </div>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="card shadow-sm border-0 p-3">
+          <h5 class="fw-bold">Navigation</h5>
+          <div class="d-grid gap-2 mt-3">
+            <a href="{{ url_for('admin.customers') }}" class="btn btn-outline-primary">Customers</a>
+            <a href="{{ url_for('admin.policies') }}" class="btn btn-outline-primary">Policies</a>
+            <a href="{{ url_for('admin.claims') }}" class="btn btn-outline-primary">Claims</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card shadow-sm border-0 p-3">
+          <h5 class="fw-bold">Statistics</h5>
+          <ul class="list-group list-group-flush mt-3">
+            <li class="list-group-item d-flex justify-content-between"><span>Active Policies</span><strong>{{ active_policies }}</strong></li>
+            <li class="list-group-item d-flex justify-content-between"><span>Expired Policies</span><strong>{{ expired_policies }}</strong></li>
+            <li class="list-group-item d-flex justify-content-between"><span>Approved Claims</span><strong>{{ approved_claims }}</strong></li>
+            <li class="list-group-item d-flex justify-content-between"><span>Rejected Claims</span><strong>{{ rejected_claims }}</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

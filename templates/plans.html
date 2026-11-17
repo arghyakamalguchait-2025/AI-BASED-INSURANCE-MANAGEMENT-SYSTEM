@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Insurance Plans | InsureWise AI{% endblock %}
+{% block content %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+      <div>
+        <h2 class="fw-bold mb-0">Insurance Plans</h2>
+      </div>
+      <form class="d-flex gap-2" method="get">
+        <select class="form-select" name="category">
+          <option value="all">All categories</option>
+          <option value="Life Insurance" {% if active_category == 'Life Insurance' %}selected{% endif %}>Life Insurance</option>
+          <option value="Health Insurance" {% if active_category == 'Health Insurance' %}selected{% endif %}>Health Insurance</option>
+          <option value="Vehicle Insurance" {% if active_category == 'Vehicle Insurance' %}selected{% endif %}>Vehicle Insurance</option>
+        </select>
+        <input type="text" name="search" class="form-control" placeholder="Search plans" value="{{ search_term }}">
+        <button class="btn btn-primary" type="submit">Filter</button>
+      </form>
+    </div>
+
+    <div class="row g-4">
+      {% for plan in plans %}
+      <div class="col-md-6 col-xl-4">
+        <div class="card h-100 shadow-sm border-0 plan-card">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="badge bg-primary-subtle text-primary">{{ plan.category }}</span>
+              <span class="text-success fw-semibold">₹{{ '%.2f' % plan.monthly_premium }}/mo</span>
+            </div>
+            <h4 class="fw-bold">{{ plan.plan_name }}</h4>
+            <p class="text-secondary">{{ plan.description }}</p>
+            <ul class="small text-secondary mb-3">
+              <li>Coverage: ₹{{ '{:,.0f}'.format(plan.coverage_amount) }}</li>
+              <li>Duration: {{ plan.duration_years }} years</li>
+              <li>Benefits: {{ plan.benefits }}</li>
+            </ul>
+            {% if current_user.is_authenticated and current_user.role == 'customer' %}
+              <form method="post" action="{{ url_for('insurance.apply_plan', plan_id=plan.id) }}">
+                <button type="submit" class="btn btn-primary w-100">Apply for Plan</button>
+              </form>
+            {% else %}
+              <a href="{{ url_for('auth.login') }}" class="btn btn-primary w-100">Login to Apply</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <div class="col-12">
+        <div class="alert alert-info">No plans found matching your current filters.</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
